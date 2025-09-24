@@ -9,9 +9,9 @@
 * range between 500 - 200. The lower the value, the more moiture has been detected.
 *
 * created:    September 11th, 2025
-* updated:    September 22nd, 2025
+* updated:    September 23rd, 2025
 * author:     ITWorks4U
-* version:    1.0.3
+* version:    1.0.4
 */
 
 #include "moiture_data.h"
@@ -29,6 +29,12 @@ void setup() {
   Serial.begin(BAUD_RATE);
   pinMode(PIN_MOSFET_0, OUTPUT);
   pinMode(PIN_MOSFET_1, OUTPUT);
+  pinMode(PIN_SENSOR_0, OUTPUT);
+  pinMode(PIN_SENSOR_1, OUTPUT);
+
+  //  permanently turn on the sensors
+  digitalWrite(PIN_SENSOR_0, HIGH);
+  digitalWrite(PIN_SENSOR_1, HIGH);
 }
 
 void loop() {
@@ -38,14 +44,14 @@ void loop() {
   Serial.println("A0: " + String(moiture_data_a0));
   Serial.println("A1: " + String(moiture_data_a1));
 
-  //  if A0 returns a high value, then turn on MOSFET on pin 2
+  //  if A0 returns a high value, then turn on MOFSET on pin 2
   if (moiture_data_a0 > THRESHOLD_MOITURE) {
     digitalWrite(PIN_MOSFET_0, HIGH);
   } else {
     digitalWrite(PIN_MOSFET_0, LOW);
   }
 
-  //  same procedure for A1 => MOSFET on pin 3
+  //  same procedure for A1 => MOFSET on pin 3
   if (moiture_data_a1 > THRESHOLD_MOITURE) {
     digitalWrite(PIN_MOSFET_1, HIGH);
   } else {

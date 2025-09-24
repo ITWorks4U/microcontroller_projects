@@ -1,0 +1,7 @@
+September 22nd, 2025
+-	completition of project
+
+September# 23rd, 2025
+-	moved sensor power for moiture sensors from battery to microcontroller
+	-	drained too much power from the battery
+	-	are still powered on
