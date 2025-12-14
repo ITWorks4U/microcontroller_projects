@@ -17,7 +17,7 @@
 * created:    September 11th, 2025
 * updated:    November 11th, 2025
 * author:     ITWorks4U
-* version:    1.1.10
+* version:    1.1.11
 */
 
 #ifndef PIN_SETTINGS_H

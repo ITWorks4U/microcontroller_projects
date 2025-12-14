@@ -15,21 +15,19 @@
 * NOTE: Only available for certain micro controller boards, like Arduino Uno.
 *
 * created:    September 11th, 2025
-* updated:    November 11th, 2025
+* updated:    December 13th, 2025
 * author:     ITWorks4U
-* version:    1.1.10
+* version:    1.1.11
 */
 
-#include <LowPower.h>
 #include "moiture_data.h"
 #include "pin_settings.h"
 
 static int moiture_data_a0 = -1;
+static unsigned long _max_wait_duration = 0;
 
 void setup() {
-  #ifdef WITH_DEBUG
   Serial.begin(115200);
-  #endif
 
   pinMode(PIN_MOSFET, OUTPUT);
   pinMode(PIN_MOITURE_SENSOR, INPUT);
@@ -42,19 +40,20 @@ void setup() {
 }
 
 void loop() {
-  trigger_moiture_sensor();
+  //  run every one day
+  if (millis() - _max_wait_duration > SLEEP_TIME_MS) {
+    _max_wait_duration = millis();
+    trigger_moiture_sensor();
 
-  if (moiture_data_a0 > THRESHOLD_MOITURE) {
-    digitalWrite(PIN_MOSFET, HIGH);
-    delay(DELAY_MS);
-    digitalWrite(PIN_MOSFET, LOW);
+    if (moiture_data_a0 > THRESHOLD_MOITURE) {
+      digitalWrite(PIN_MOSFET, HIGH);
+      delay(DELAY_MS);
+      digitalWrite(PIN_MOSFET, LOW);
+    }
+
+    digitalWrite(PIN_MOITURE_POWER, LOW);
+    pinMode(PIN_MOITURE_SENSOR, INPUT);           // avoid leakage
   }
-
-  digitalWrite(PIN_MOITURE_POWER, LOW);
-  pinMode(PIN_MOITURE_SENSOR, INPUT);           // avoid leakage
-  ADCSRA &= ~(1 << ADEN);                       // turn off ADC
-
-  time_to_sleep();
 }
 
 void trigger_moiture_sensor(void) {
@@ -63,16 +62,6 @@ void trigger_moiture_sensor(void) {
   delay(SENSOR_READ_DELAY);
 
   moiture_data_a0 = analogRead(PIN_MOITURE_SENSOR);
-
-  #ifdef WITH_DEBUG
-  Serial.println("data value after " + String(millis()) + " ms: " + String(moiture_data_a0));
-  #endif
-
+  Serial.println("data value after " + String(millis() / 1000) + " s: " + String(moiture_data_a0));
   digitalWrite(PIN_MOITURE_POWER, LOW);
-}
-
-void time_to_sleep(void) {
-  for (int i = 0; i < SLEEP_CYCLES; i++) {
-    LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
-  }
 }
