@@ -1,0 +1,29 @@
+###
+#   December 7th, 2025
+###
+
+-   using Arduino IDE
+-   inital setup
+-   LED stripe is able to use
+-   a short time amount for playing music works
+
+###
+#   April 11th, 2026
+###
+
+-   switched to platform IO for better work overview
+-   added error codecs
+
+###
+#   April 13th, 2026
+###
+
+-   bug: the music stops suddenly, unclear why
+-   replaced MP3 module with another module, but the behavior sometimes still exists
+
+###
+#   April 15th, 2026
+###
+
+-   based on laast bug (April 13th, 2026) maybe the tested music or MP3 module or micro SD seems be corrupted
+    or not enough power can be supplied or else
