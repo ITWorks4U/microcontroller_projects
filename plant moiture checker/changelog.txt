@@ -17,3 +17,13 @@ April 15th, 2026
 	in a sequencial order
 -	comes with an own map() function, because in C this function doesn't exist
 -	if no sensor has been detected, the internal LED toggles each 500ms forever
+
+April 18th, 2026
+-	added missing potentiometer register
+-	if no potentiometer has been found, then a fixed timespan of 24 hours is set
+-	renamed init_devices() function to scan_for_sensors()
+-	added scan_for_potentiometer_existence() function to check, if a potentiometer
+	has been detected in address A0 => Since none of the used hardware components
+	doesn't come with any way for identification, this is a fixed assumption, that
+	on address A0 is a potentiometer or not. Same assumption for addresses A1..A4,
+	as well as, addresses 2..5 for MOSFET gates

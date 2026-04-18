@@ -10,8 +10,9 @@ unsigned int wait_time_nbr_of_sensors = 0;                     // initial settin
 static int addr_sensor_out[] = {8, 9, 10, 11};                 // digital output 8..11 (sensor power)
 static int addr_sensor_in[] = {15, 16, 17, 18};                // analog input A1..A5
 static int addr_gates[] = {2, 3, 4, 5};                        // digital output 2..5 (MOSFET gate)
+static bool on_potentiometer_existing = false;                 // checks, if a potentiometer on address A0 has been detected
 
-bool init_devices(void) {
+bool scan_for_sensors(void) {
     int nbr_of_devices = 0;
 
     for(int i = 0; i < MAX_NBR_OF_DEVICES; i++) {
@@ -50,7 +51,18 @@ bool init_devices(void) {
     return nbr_of_devices > 0;
 }
 
-void runtime_sequence() {
+void scan_for_potentiometer_existence(void) {
+    pinMode(PIN_POT_TIME_SPAN, INPUT);
+
+    if (analogRead(PIN_POT_TIME_SPAN) > MIN_RESP_SENSOR_VALUE) {
+        // if a potentiometer was found, then this can be used,
+        // otherwise a fixed time span of 24 hours will be used
+        // instead
+        on_potentiometer_existing = true;
+    }
+}
+
+void runtime_sequence(void) {
     static int elapsed_seconds = 0;
     static int counter_hours = 0;
     elapsed_seconds = (elapsed_seconds + 1) % HOUR_IN_SECONDS;
@@ -59,10 +71,16 @@ void runtime_sequence() {
         counter_hours = (counter_hours + 1) % LONGEST_TIME_HOURS;
     }
 
-    int hour_time = map(analogRead(PIN_POT_TIME_SPAN), 0, 1023, SHORTEST_TIME_HOURS, LONGEST_TIME_HOURS);
+    if (on_potentiometer_existing) {
+        int hour_time = map(analogRead(PIN_POT_TIME_SPAN), 0, 1023, SHORTEST_TIME_HOURS, LONGEST_TIME_HOURS);
 
-    if (counter_hours % hour_time == 0) {                      // the time span has been reached
-        trigger_moiture_sensor();                              // scan the plant earth for a too dry level
+        if (counter_hours % hour_time == 0) {                  // the time span has been reached
+            trigger_moiture_sensor();                          // scan the plant earth for a too dry level
+        }
+    } else {
+        if (counter_hours % LONGEST_TIME_HOURS == 0) {
+            trigger_moiture_sensor();
+        }
     }
 }
 

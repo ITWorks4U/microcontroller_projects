@@ -3,9 +3,9 @@
 | general |
 | - |
 | created: September 11th, 2025 |
-| updated: April 16th, 2026 |
+| updated: April 18th, 2026 |
 | author: ITWorks4U |
-| version: 2.0.0 |
+| version: 2.0.1 |
 
 ##  description
 
@@ -22,7 +22,7 @@
 | [IRLZ44N MOSFET (N-Channel)](https://www.amazon.de/dp/B0CBKH4XGL?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1) | controlled by the arduino board |
 | [simple pump](https://www.amazon.de/dp/B0FC245QMP?ref=ppx_yo2ov_dt_b_fed_asin_title) | 5V, 240 mA; external powered |
 | Muizei development board | similar to an Arduino Uno Rev 3 |
-| [10 kOhm potentiometer](https://www.amazon.de/Aussel-Potentiometer-Drehpotentiometer-Kappenmuttern-Unterlegscheibe/dp/B0734K6WYP/ref=sr_1_8?crid=2WYAFO1DFXAWY&dib=eyJ2IjoiMSJ9.bHWlfozohQIKw-ermoCjjYmeznZ1ggCN06DDlZPRIrzSytwloGsBez1Fg7gJXqk9mIJQd2_6d2QyDS8XsjkrQxbnJ2UKduXVpWmXKbwqIewo57zzCN_FaFMnwm_yZJt2bbBhsfKTQ8MsR-y5CJGW0HXBVC913-x1BwxyImS1dtvqf-vLlDqmeFTayOyKzf5tWzer7nVBSGUlHEZBChjV12G0KAc17CTR8x3e-XUA0L2Cs7tLSjCZI_btYZAB37FV5TIa2LdCejVIe4PQfouQ-98nglqTYHemU-WAiFhn5sM.YwzO0yZbGCkgzjgyUkK4EbMCjuyI1_S6NmzB5lzGpR0&dib_tag=se&keywords=potentiometer+10k&qid=1776347764&sprefix=potentiometer+10%2Caps%2C129&sr=8-8) | to control the timespan between 3 and 24 hours
+| [10 kOhm potentiometer](https://www.amazon.de/Aussel-Potentiometer-Drehpotentiometer-Kappenmuttern-Unterlegscheibe/dp/B0734K6WYP/ref=sr_1_8?crid=2WYAFO1DFXAWY&dib=eyJ2IjoiMSJ9.bHWlfozohQIKw-ermoCjjYmeznZ1ggCN06DDlZPRIrzSytwloGsBez1Fg7gJXqk9mIJQd2_6d2QyDS8XsjkrQxbnJ2UKduXVpWmXKbwqIewo57zzCN_FaFMnwm_yZJt2bbBhsfKTQ8MsR-y5CJGW0HXBVC913-x1BwxyImS1dtvqf-vLlDqmeFTayOyKzf5tWzer7nVBSGUlHEZBChjV12G0KAc17CTR8x3e-XUA0L2Cs7tLSjCZI_btYZAB37FV5TIa2LdCejVIe4PQfouQ-98nglqTYHemU-WAiFhn5sM.YwzO0yZbGCkgzjgyUkK4EbMCjuyI1_S6NmzB5lzGpR0&dib_tag=se&keywords=potentiometer+10k&qid=1776347764&sprefix=potentiometer+10%2Caps%2C129&sr=8-8) | to control the timespan between 3 and 24 hours => if no potentiometer needs to be used, then a fixed timespan of 24 hours is given instead |
 
 ####    workflow
 1.  scan for required hardware
@@ -38,3 +38,4 @@
 | `{8, 9, 10, 11}` | addresses for  moiture sensor power supply |
 | `{A1, A2, A3, A4}` | addresses for moiture sensor analog value |
 | `{2, 3, 4, 5}` | addresses for MOSFET gate |
+| `{A0} (14)` | address for the potentiometer |

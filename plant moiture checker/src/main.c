@@ -1,8 +1,8 @@
 /*
 * created:    September 11th, 2025
-* updated:    April 16th, 2026
+* updated:    April 18th, 2026
 * author:     ITWorks4U
-* version:    2.0.0
+* version:    2.0.1
 */
 
 #include <Arduino.h>
@@ -10,7 +10,7 @@
 #include "moiture_settings.h"            // only for external wait_time_nbr_of_sensors
 
 void setup() {
-    if (!init_devices()) { // on init no moiture sensor has been detected => no run sequence for loop
+    if (!scan_for_sensors()) { // on init no moiture sensor has been detected => no run sequence for loop
         pinMode(LED_BUILTIN, OUTPUT);
         bool toggle_led = false;
 
@@ -20,6 +20,8 @@ void setup() {
             delay(500);
         }
     }
+
+    scan_for_potentiometer_existence();
 }
 
 void loop() {

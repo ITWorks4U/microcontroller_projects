@@ -39,7 +39,14 @@ extern unsigned int wait_time_nbr_of_sensors;
 ///        The minimal time consumes 500ms and can be
 ///        extended up to 1.5 seconds.
 /// @return true, if the initialization was successful, otherwise false
-bool init_devices(void);
+bool scan_for_sensors(void);
+
+/// @brief Scan, if a potentiometer on address A0 has been plugged in.
+///
+///        If true, then the timespan can be switched between 3 and 24 hours,
+///        otherwise a fixed timespan of 24 hours is set.
+/// @param  
+void scan_for_potentiometer_existence(void);
 
 /// @brief Run over and over again.
 void runtime_sequence(void);
