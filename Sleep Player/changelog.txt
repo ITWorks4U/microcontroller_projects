@@ -27,3 +27,10 @@
 
 -   based on laast bug (April 13th, 2026) maybe the tested music or MP3 module or micro SD seems be corrupted
     or not enough power can be supplied or else
+
+###
+#   April 28th, 2026
+###
+
+-   the used library FastLED has been updated, whereas the known version is still the same
+-   changed FastLED initialization: fl:GRB with GRB only (light_settings.cpp:6)

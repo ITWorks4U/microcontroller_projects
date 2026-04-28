@@ -3,7 +3,7 @@
 static CRGB _led_stripe[NUMBER_LEDS];
 
 void init_led_stripe(void) {
-    FastLED.addLeds<WS2812B, PIN_LED_STRIPE, fl::GRB>(_led_stripe, NUMBER_LEDS);
+    FastLED.addLeds<WS2812B, PIN_LED_STRIPE, GRB>(_led_stripe, NUMBER_LEDS);
     FastLED.setBrightness(50);
 }
 
