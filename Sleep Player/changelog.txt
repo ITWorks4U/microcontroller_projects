@@ -34,3 +34,14 @@
 
 -   the used library FastLED has been updated, whereas the known version is still the same
 -   changed FastLED initialization: fl:GRB with GRB only (light_settings.cpp:6)
+
+###
+#   May 7th, 2026
+###
+-   removed test block
+-   replaced delay() with elapsed milliseconds in main to avoid an undefined behavior,
+    when the stop music button has been pressed
+-   changed input type of the music button => INPUT_PULLUP to INPUT
+-   NOTE:   In the new version of FastLED (official with 4.0.0) the LED stripe is unable to
+            control in the expected way. All leds with the full power starts to work, which shall not
+            and also the led color doesn't change on active music
