@@ -16,7 +16,7 @@
                                     //  NOTE:   a delay of estimated 10 +/- 5 seconds may appear,
                                     //          because the build time consumes a bit of time
 
-// #define TIME_DISPLAY_AVAILABLE   //  only if a LCD has been plugged in
+#define TIME_DISPLAY_AVAILABLE   //  only if a LCD has been plugged in
 
 /////
 /// structures

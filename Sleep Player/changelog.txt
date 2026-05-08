@@ -45,3 +45,12 @@
 -   NOTE:   In the new version of FastLED (official with 4.0.0) the LED stripe is unable to
             control in the expected way. All leds with the full power starts to work, which shall not
             and also the led color doesn't change on active music
+
+###
+#   May 8th, 2026
+###
+-   using the library with version 3.10.3 (relased on September 2025)
+    -   see NOTE from May 7th, 2026
+    -   the CPU cores got hot when the LED stripe has been fully powered
+-   display the time by serial output => only for debugging
+    -   planned in future: using a LCD (I2C) to display the time

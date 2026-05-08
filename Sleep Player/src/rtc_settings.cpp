@@ -56,6 +56,9 @@ void display_time(const RtcDateTime dt) {
         //    1) the battery on the device is low or even missing and the power line was disconnected
         return;
     }
+
+    String s = String(dt.Hour()) + ":" + String(dt.Minute()) + ":" + String(dt.Second());
+    Serial.println(s);
 }
 #endif
 
