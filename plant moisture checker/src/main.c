@@ -1,16 +1,16 @@
 /*
 * created:    September 11th, 2025
-* updated:    April 18th, 2026
+* updated:    May 14th, 2026
 * author:     ITWorks4U
-* version:    2.0.1
+* version:    2.0.2
 */
 
 #include <Arduino.h>
 #include "general_settings.h"
-#include "moiture_settings.h"            // only for external wait_time_nbr_of_sensors
+#include "moisture_settings.h"                              // only for external wait_time_nbr_of_sensors
 
 void setup() {
-    if (!scan_for_sensors()) { // on init no moiture sensor has been detected => no run sequence for loop
+    if (!scan_for_sensors()) {                              // on init no moisture sensor has been detected => no run sequence for loop
         pinMode(LED_BUILTIN, OUTPUT);
         bool toggle_led = false;
 
@@ -25,11 +25,8 @@ void setup() {
 }
 
 void loop() {
-    // NOTE: Since an Arduino (Uno) can't handle a value, like 8,640,000 ms (one day),
-    //       and the range of an integer is [-32,768..32,767] an another way is in use.
-
     static ulong_t last_timer = 0;
-    static int reduced_additional_time = 0;              // subtract up to additional 400 ms for the next clean 1 second
+    static int reduced_additional_time = 0;                 // subtract up to additional 400 ms for the next clean 1 second
 
     if (wait_time_nbr_of_sensors > 0) {
         reduced_additional_time = wait_time_nbr_of_sensors;

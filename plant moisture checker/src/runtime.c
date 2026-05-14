@@ -1,9 +1,9 @@
 #include <Arduino.h>
 #include "general_settings.h"
-#include "moiture_settings.h"
+#include "moisture_settings.h"
 #include "pump_settings.h"
 
-static Device devices[MAX_NBR_OF_DEVICES];                     // moiture sensor(s)
+static Device devices[MAX_NBR_OF_DEVICES];                     // moisture sensor(s)
 static Pump pumps[MAX_NBR_OF_DEVICES];                         // pump(s)
 unsigned int wait_time_nbr_of_sensors = 0;                     // initial setting (more in use in loop() function)
 
@@ -27,7 +27,7 @@ bool scan_for_sensors(void) {
         digitalWrite(addr_sensor_out[i], HIGH);                // turn on the outgoing sensor for a short time
         delay(TINY_DELAY_PWR_SENSOR);                          // wait 125 ms
 
-        // Check, if the sensor on pin A1..A5 is connected. To realize this, a 10 kOhm
+        // Check, if the sensor on pin A1..A5 is connected. To realize this, a 10 kΩ
         // resistor for each analog pin A1..A5 and GND is given to prevent a random floating value
         // from the certain pin. Since a sensor has been plugged in, a value of at least
         // 51 can be read, otherwise no sensor is truly connected to that pin.
@@ -75,16 +75,16 @@ void runtime_sequence(void) {
         int hour_time = map(analogRead(PIN_POT_TIME_SPAN), 0, 1023, SHORTEST_TIME_HOURS, LONGEST_TIME_HOURS);
 
         if (counter_hours % hour_time == 0) {                  // the time span has been reached
-            trigger_moiture_sensor();                          // scan the plant earth for a too dry level
+            trigger_moisture_sensor();                          // scan the plant earth for a too dry level
         }
     } else {
         if (counter_hours % LONGEST_TIME_HOURS == 0) {
-            trigger_moiture_sensor();
+            trigger_moisture_sensor();
         }
     }
 }
 
-void trigger_moiture_sensor(void) {
+void trigger_moisture_sensor(void) {
     for(int i = 0; i < MAX_NBR_OF_DEVICES; i++) {
         if (devices[i].exits) {
 

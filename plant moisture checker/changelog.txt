@@ -27,3 +27,7 @@ April 18th, 2026
 	doesn't come with any way for identification, this is a fixed assumption, that
 	on address A0 is a potentiometer or not. Same assumption for addresses A1..A4,
 	as well as, addresses 2..5 for MOSFET gates
+
+May 14th, 2026
+-	logical issue: the threshold value was too low (when the sensor is dry, as well as the plant earth, the sensor value leads up to 2,200)
+	-	changed from 425 to 2,000

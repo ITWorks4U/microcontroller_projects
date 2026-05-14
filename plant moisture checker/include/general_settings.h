@@ -9,7 +9,7 @@
 /// definitions
 /////
 
-#define PIN_POT_TIME_SPAN    A0        // 10 kOhm potentiometer for time span [3..24] h
+#define PIN_POT_TIME_SPAN    A0        // 10 kΩ potentiometer for time span [3..24] h
 #define SHORTEST_TIME_HOURS  3         // minimum: 3 hours
 #define LONGEST_TIME_HOURS   24        // maximum: 24 hours
 
@@ -22,7 +22,7 @@ typedef unsigned long ulong_t;
 /// external
 /////
 
-/// @brief Depending on how many moiture sensors are truly plugged in,
+/// @brief Depending on how many moisture sensors are truly plugged in,
 ///        each sensor comes with a delay of 100ms to prepare sensor data.
 ///
 ///        Since a delay() function is in use (runtime.c:71), the delayed time
