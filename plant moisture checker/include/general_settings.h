@@ -19,18 +19,6 @@
 typedef unsigned long ulong_t;
 
 /////
-/// external
-/////
-
-/// @brief Depending on how many moisture sensors are truly plugged in,
-///        each sensor comes with a delay of 100ms to prepare sensor data.
-///
-///        Since a delay() function is in use (runtime.c:71), the delayed time
-///        needs to be subtracted in loop() function for the next elapsed second
-///        to prevent a continiously delay after many hours or days.
-extern unsigned int wait_time_nbr_of_sensors;
-
-/////
 /// function prototypes
 /////
 

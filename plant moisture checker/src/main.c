@@ -1,8 +1,8 @@
 /*
 * created:    September 11th, 2025
-* updated:    May 14th, 2026
+* updated:    May 18th, 2026
 * author:     ITWorks4U
-* version:    2.0.2
+* version:    2.1.0
 */
 
 #include <Arduino.h>
@@ -26,19 +26,9 @@ void setup() {
 
 void loop() {
     static ulong_t last_timer = 0;
-    static int reduced_additional_time = 0;                 // subtract up to additional 400 ms for the next clean 1 second
 
-    if (wait_time_nbr_of_sensors > 0) {
-        reduced_additional_time = wait_time_nbr_of_sensors;
-        wait_time_nbr_of_sensors = 0;
-    }
-
-    if (millis() - last_timer > (TIMEOUT_IN_MS - reduced_additional_time)) {
+    if (millis() - last_timer > TIMEOUT_IN_MS) {            // each one elapsed second
         last_timer = millis();
         runtime_sequence();
-
-        if (reduced_additional_time > 0) {
-            reduced_additional_time = 0;
-        }
     }
 }

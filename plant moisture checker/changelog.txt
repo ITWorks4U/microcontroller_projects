@@ -2,7 +2,7 @@ September 22nd, 2025
 -	completition of project
 
 September# 23rd, 2025
--	moved sensor power for moiture sensors from battery to microcontroller
+-	moved sensor power for moisture sensors from battery to microcontroller
 	-	drained too much power from the battery
 	-	are still powered on
 
@@ -13,7 +13,7 @@ April 15th, 2026
 	handle for an Arduino Uno, each second the sequence repeats and checks,
 	if the certain time span has been reached
 -	a potentiometer (10 kOhms) can modify the timespan between 3 and 24 hours
--	up to four moiture sensors with also up to four pumps shall be able to control
+-	up to four moisture sensors with also up to four pumps shall be able to control
 	in a sequencial order
 -	comes with an own map() function, because in C this function doesn't exist
 -	if no sensor has been detected, the internal LED toggles each 500ms forever
@@ -31,3 +31,34 @@ April 18th, 2026
 May 14th, 2026
 -	logical issue: the threshold value was too low (when the sensor is dry, as well as the plant earth, the sensor value leads up to 2,200)
 	-	changed from 425 to 2,000
+
+May 18th, 2026
+-	full update of the project
+	-	when up to all 4 pumps may be active, the total current flow is set up to 960mA
+		-	since an external power supply with 5V, 1A DC is in use, this shall work fine, but this may also reduce the pump's lifespan
+	-	only one pump for a certain timespan can be active, if given
+		-	only 5V with 240mA power consumption is in use
+	-	since an Arduino Uno is in use, the measured value from the moisture sensor lies between 80 (wet) and 120+ (dry)
+		-	the threshold value is set to 120 to mark a plant earth dry
+	
+-	updated files:
+	-	pump_settings.h
+		-	removed => became obsolete
+	-	general_settings.h
+		-	removed external wait_time_nbr_of_sensors => no longer required
+	-	moisture_settings.h
+		-	threshold value changed from 2,000 to 120 (2,000 may be in use, if an another MC, like ESP32, is in use instead)
+		-	removed DURATION_SENSOR_IN_MS, TINY_DELAY_PWR_SENSOR => no longer required
+		-	renamed MIN_RESP_SENSOR_VALUE to MIN_RESP_SENSOR_DATA
+		-	renamed Device to MoistureSensorDevice
+		-	removed member data => no longer required
+	-	main.c
+		-	in loop() function only each elapsed one second the runtime sequence is running
+	-	runtime.c
+		-	removed addr_sensor_out field => since the moisture sensors are permanently powered by 5V,
+			there's no need to control these manually; the delay() instructions are also no longer required
+		-	removed wait_time_nbr_of_sensors => no longer required
+		-	added device_id to handle up to all 4 pumps, depending on which moisture sensor truly exists
+		-	updated scan_for_sensors() function => removed initial pump instruction for each pump
+		-	updated trigger_moisture_sensor() function
+			-	changed from loop to a single instruction, depending on the certain sensor, as well as, MOSFET gate

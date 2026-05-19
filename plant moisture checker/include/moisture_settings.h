@@ -9,11 +9,9 @@
 /// constants
 /////
 
-#define THRESHOLD_MOITURE       2000     // the limitation, when the pump shall start
-#define DURATION_SENSOR_IN_MS   100      // 100ms delay before reading the next data
-#define MAX_NBR_OF_DEVICES      4        // up to 4 sensors and 4 pumps
-#define MIN_RESP_SENSOR_VALUE   50       // minimal responding analog sensor value
-#define TINY_DELAY_PWR_SENSOR   125      // 125ms for inital sequence
+#define THRESHOLD_MOITURE       120     // the limitation, when the pump shall start
+#define MAX_NBR_OF_DEVICES      4       // up to 4 sensors and 4 pumps
+#define MIN_RESP_SENSOR_DATA   50       // minimal responding analog sensor data
 
 /////
 /// structures
@@ -25,8 +23,7 @@
 ///        sensor is available.
 typedef struct {
     bool exits;                          // true := available, false := unavailable
-    int data;                            // in a range of [400..2,000]
-} Device;
+} MoistureSensorDevice;
 
 /////
 /// function prototypes
