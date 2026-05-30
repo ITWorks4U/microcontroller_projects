@@ -1,0 +1,5 @@
+May 21st, 2026
+-	created clone from Arduino plant moisture checker project for ESP32
+	-	since Arduino framework is in use, the source files are written in C++,
+		otherwise the project was unable to build
+	-	updated code structure, addresses, ... for the used NodeMCU ESP32 Vroom Devkit V1 microcontroller
